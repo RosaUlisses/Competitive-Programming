@@ -3,4 +3,4 @@ project(Competitive_Programming)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Competitive_Programming footbal.cpp)
+add_executable(Competitive_Programming good_array.cpp)
