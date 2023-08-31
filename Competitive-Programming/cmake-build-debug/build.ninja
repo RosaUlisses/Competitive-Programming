@@ -49,7 +49,7 @@ cmake_ninja_workdir = C$:\Programming\Competitive-Programming\Competitive-Progra
 
 build cmake_object_order_depends_target_Competitive_Programming: phony || CMakeFiles\Competitive_Programming.dir
 
-build CMakeFiles\Competitive_Programming.dir\good_array.cpp.obj: CXX_COMPILER__Competitive_Programming_Debug C$:\Programming\Competitive-Programming\Competitive-Programming\good_array.cpp || cmake_object_order_depends_target_Competitive_Programming
+build CMakeFiles\Competitive_Programming.dir\password.cpp.obj: CXX_COMPILER__Competitive_Programming_Debug C$:\Programming\Competitive-Programming\Competitive-Programming\password.cpp || cmake_object_order_depends_target_Competitive_Programming
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -MDd -Zi -std:c++17
   OBJECT_DIR = CMakeFiles\Competitive_Programming.dir
   OBJECT_FILE_DIR = CMakeFiles\Competitive_Programming.dir
@@ -64,7 +64,7 @@ build CMakeFiles\Competitive_Programming.dir\good_array.cpp.obj: CXX_COMPILER__C
 #############################################
 # Link the executable Competitive_Programming.exe
 
-build Competitive_Programming.exe: CXX_EXECUTABLE_LINKER__Competitive_Programming_Debug CMakeFiles\Competitive_Programming.dir\good_array.cpp.obj
+build Competitive_Programming.exe: CXX_EXECUTABLE_LINKER__Competitive_Programming_Debug CMakeFiles\Competitive_Programming.dir\password.cpp.obj
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -MDd -Zi
   LINK_FLAGS = /machine:X86 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
