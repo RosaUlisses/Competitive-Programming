@@ -2,49 +2,52 @@
 #include <map>
 #include <set>
 #include <unordered_set>
+#include <unordered_map>
 #include <vector>
 
 using namespace std;
 
-typedef map<int, vector<int>> graph;
+typedef unordered_map<int, vector<int>> graph;
 
-void is_cycle(graph& g, int vertex, set<int>& visited_vertexes, unordered_set<pair<int,int>>& visited_edges, int first_vertex, bool& result) {
-    if(vertex != first_vertex) {
-        visited_vertexes.insert(vertex);
+struct pair_hash {
+    size_t  operator()(const pair<int,int>& p) const {
+        auto h1 = hash<int>()(p.first);
+        auto h2 = hash<int>()(p.second);
+        return h1 ^ (h2 << 1);
     }
-     
-    for(auto adjacent : g[vertex]) {
-        if(visited_edges.find({adjacent, vertex}) != visited_edges.end()) continue; 
-            
-        visited_edges.insert({adjacent, vertex});
-        if(adjacent == first_vertex) {
-            if(visited_vertexes.find(first_vertex) == visited_vertexes.end()) {
-                result && true;
-                visited_vertexes.insert(first_vertex);
-            }
-            else {
-                result && false;
-            }
+};
+
+void set_degrees(graph& g, int vertex, set<int>& visited_vertexes, map<int,int>& degrees) {
+    visited_vertexes.insert(vertex);
+    
+    for (auto adjacent : g[vertex]) {
+        if (degrees.find(vertex) == degrees.end()) {
+            degrees.insert({vertex, 1});
         }
-        else {
-            is_cycle(g, adjacent, visited_vertexes, visited_edges, first_vertex, result);
-        }
+        else degrees[vertex]++;
+
+        if (visited_vertexes.find(adjacent) != visited_vertexes.end()) continue;
+        set_degrees(g, adjacent, visited_vertexes, degrees); 
     }
 }
 
 
 int get_number_of_cyclical_components(graph g) {
     set<int> visited_vertexes;
-    unordered_set<pair<int,int>> visited_edges;
     int number_of_cycles = 0;
 
-    for(auto vertex : g) {
-        if(visited_vertexes.find(vertex.first) != visited_vertexes.end()) continue; 
-        bool is_there_cycle = true;
-        is_cycle(g, vertex.first, visited_vertexes, visited_edges, vertex.first, is_there_cycle);
-        if(is_there_cycle) {
+    for(auto [vertex, _] : g) {
+        if (visited_vertexes.find(vertex) != visited_vertexes.end()) continue;
+        map<int,int> degrees;
+        set_degrees(g, vertex, visited_vertexes, degrees);
+        bool is_cyclic = true;
+        for (auto [_, degree] : degrees) {
+            if (degree != 2) is_cyclic = false; 
+        }
+        if (is_cyclic && degrees.size() > 2) {
             number_of_cycles++;
         }
+        degrees.clear();
     }
 
     return number_of_cycles;
@@ -66,7 +69,7 @@ int main() {
         g[first].push_back(second);
         g[second].push_back(first);
     }
-
+    
     cout << get_number_of_cyclical_components(g);
 
     return 0;    
