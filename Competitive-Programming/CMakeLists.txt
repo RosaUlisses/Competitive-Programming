@@ -3,4 +3,4 @@ project(Competitive_Programming)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Competitive_Programming cyclic_components.cpp)
+add_executable(Competitive_Programming graph/cyclic_components.cpp)
