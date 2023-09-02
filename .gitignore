@@ -12,3 +12,5 @@ _deps
 .idea/
 Competitive-Programming/.idea
 Competitive-Programming/cmake-build-debug
+Competitive-Programming/CMakeLists.txt
+CMakeLists.txt
