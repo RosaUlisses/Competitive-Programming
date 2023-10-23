@@ -29,17 +29,14 @@ void solve() {
 
     sort(all(nums));
     
-    ivec sorted(n);
-    int ix = n - 1;
+    ivec sorted;
     for (int i = 0; i < n / 2; ++i) {
-        sorted[ix] = nums[i]; 
-        ix--;
-        sorted[ix] = nums[nums.size() - 1 - i];
-        ix--;
+        sorted.push_back(nums[i]); 
+        sorted.push_back(nums[nums.size() - i]);
     }
 
     if (nums.size() % 2 != 0) {
-        sorted[0] = nums[n / 2];
+        sorted.push_back(nums[n / 2 + 1]);
     }
 
     for (int i = 0; i < n; ++i) {

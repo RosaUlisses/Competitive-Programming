@@ -5,7 +5,7 @@
 
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
-#define all(x) x.begin(), x.end()
+#define all(x) (x.begin(), x.end())
 
 using namespace std;
 
@@ -19,34 +19,40 @@ constexpr int inf = 2e9 + 1;
 constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
+int f_diff(int v, int v2) {
+    if(v > v2) {
+        return v - v2;
+    }
+    
+    else if(v == v2) return 0;
+    
+    return ((v2 / v) + 1) * v - v2;
+}
+
 void solve() {
-    int n;
-    cin >> n;
+    int n, k; 
+    cin >> n >> k;
     ivec nums(n);
     for (int i = 0; i < n; ++i) {
         cin >> nums[i]; 
     }
 
-    sort(all(nums));
-    
-    ivec sorted(n);
-    int ix = n - 1;
-    for (int i = 0; i < n / 2; ++i) {
-        sorted[ix] = nums[i]; 
-        ix--;
-        sorted[ix] = nums[nums.size() - 1 - i];
-        ix--;
-    }
-
-    if (nums.size() % 2 != 0) {
-        sorted[0] = nums[n / 2];
-    }
-
+    int min = inf;
+    int ix = 0;
     for (int i = 0; i < n; ++i) {
-        cout << sorted[i] << " "; 
+        if(nums[i] % k == 0) {
+            print("0");
+            return;
+        }
+        int diff = f_diff(k, nums[i]);
+        if(diff < min) {
+            min = diff; 
+            ix = i;
+        }
     }
-
-    cout << "\n";
+    
+    int res = f_diff(k, nums[ix]);
+    print(res);
 }
 
 int main() {

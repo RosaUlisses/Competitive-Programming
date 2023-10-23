@@ -19,7 +19,14 @@ constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
 void solve() {
-
+    int n;
+    cin >> n;
+    ivec nums(n);
+    for (auto& i: nums) {
+        cin >> i; 
+    }
+    
+    nfkk
 }
 
 int main() {

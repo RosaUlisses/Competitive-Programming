@@ -5,7 +5,7 @@
 
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
-#define all(x) x.begin(), x.end()
+#define all(x) (x.begin(), x.end())
 
 using namespace std;
 
@@ -20,33 +20,31 @@ constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
 void solve() {
-    int n;
-    cin >> n;
-    ivec nums(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> nums[i]; 
-    }
-
-    sort(all(nums));
+    str a, b, c;
+    cin >> a >> b >> c;
     
-    ivec sorted(n);
-    int ix = n - 1;
-    for (int i = 0; i < n / 2; ++i) {
-        sorted[ix] = nums[i]; 
-        ix--;
-        sorted[ix] = nums[nums.size() - 1 - i];
-        ix--;
+    set<int> diffs;
+    for (int i = 0; i < a.size(); ++i) {
+        if (a[i] != b[i]) diffs.insert(i); 
     }
 
-    if (nums.size() % 2 != 0) {
-        sorted[0] = nums[n / 2];
+    for (int i = 0; i < a.size(); ++i) {
+        if (a[i] != b[i]) {
+            if(c[i] != b[i] && c[i] != a[i]) {
+                print("NO");
+                return;
+            }
+        }
+        
+        else {
+            if(c[i] != a[i]) {
+                print("NO");
+                return;
+            }
+        }
     }
 
-    for (int i = 0; i < n; ++i) {
-        cout << sorted[i] << " "; 
-    }
-
-    cout << "\n";
+    print("YES");
 }
 
 int main() {

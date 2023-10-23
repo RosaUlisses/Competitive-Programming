@@ -1,8 +1,9 @@
 #include <bits/stdc++.h>
 
 #define endl ('\n')
-#define print(x) cout << x << endl;
+#define print(x) cout << x << endl
 
+#define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
 #define all(x) (x.begin(), x.end())
 

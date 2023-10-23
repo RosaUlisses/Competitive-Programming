@@ -5,7 +5,7 @@
 
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
-#define all(x) x.begin(), x.end()
+#define all(x) (x.begin(), x.end())
 
 using namespace std;
 
@@ -22,30 +22,23 @@ constexpr ll maxnum = 3e5 + 100;
 void solve() {
     int n;
     cin >> n;
-    ivec nums(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> nums[i]; 
-    }
-
-    sort(all(nums));
     
-    ivec sorted(n);
-    int ix = n - 1;
-    for (int i = 0; i < n / 2; ++i) {
-        sorted[ix] = nums[i]; 
-        ix--;
-        sorted[ix] = nums[nums.size() - 1 - i];
-        ix--;
-    }
+    vector<ll> nums(n); 
+    nums[n - 1] = 1'000'000'000 - 1;
 
-    if (nums.size() % 2 != 0) {
-        sorted[0] = nums[n / 2];
+    for (int i = n - 1; i >= 2; i -= 2) {
+        nums[i - 1] = nums[i] - 1;
+        nums[i - 2] = nums[i] - 2;
+    }
+    
+    if(nums[0] == 0) {
+        nums[0] = nums[1] - 1;
     }
 
     for (int i = 0; i < n; ++i) {
-        cout << sorted[i] << " "; 
+        cout << nums[i] << " ";
     }
-
+    
     cout << "\n";
 }
 
