@@ -34,6 +34,7 @@ void solve() {
         sorted.push_back(nums[i]); 
         sorted.push_back(nums[nums.size() - i]);
     }
+    
 
     if (nums.size() % 2 != 0) {
         sorted.push_back(nums[n / 2 + 1]);

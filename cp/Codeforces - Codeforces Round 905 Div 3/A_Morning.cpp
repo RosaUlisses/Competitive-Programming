@@ -37,7 +37,7 @@ void solve() {
     
     int acc = 0;
     int curr = 1;
-
+    
     for (int i = 0; i < string.size(); ++i) {
         if(string[i] == '0' && curr != 0) {
             acc += (10 - curr); 

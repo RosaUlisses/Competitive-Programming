@@ -24,29 +24,17 @@ constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
 void solve() {
-    string mw, b;
-    cin >> mw >> b;
+    string s;
+    cin >> s;
 
-    if (b.find(mw) != string::npos) {
-        print("S");
-        return;
+    for (int i = 0; i < sz(s) - 1; ++i) {
+        if (tolower(s[i]) >= tolower(s[i + 1])) {
+            print(s << ": N");
+            return;
+        } 
     }
 
-    string summed = b + b;
-
-    if (summed.find(mw) != string::npos) {
-        print("S");
-        return;
-    }
-
-    string rv = b;
-    reverse(all(rv));
-    if (rv.find(mw) != string::npos) {
-        print("S");
-        return;
-    }
-
-    print("N");
+    print(s << ": O");
 }
 
 int main() {

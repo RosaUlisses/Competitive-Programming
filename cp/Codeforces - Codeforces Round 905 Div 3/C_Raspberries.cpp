@@ -20,9 +20,7 @@ constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
 int f_diff(int v, int v2) {
-    if(v > v2) {
-        return v - v2;
-    }
+    if(v > v2) return v - v2;
     
     else if(v == v2) return 0;
     
