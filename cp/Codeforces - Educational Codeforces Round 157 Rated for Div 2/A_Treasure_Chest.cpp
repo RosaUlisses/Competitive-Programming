@@ -29,52 +29,32 @@ constexpr int inf = 2e9 + 1;
 constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
-int b_search(ivec& v, int n) {
-    int l = 0, r = sz(v) - 1;
-    
-    int last_m = 0;
-    while(l <= r) {
-        int m = midp(l,r);
-        if(v[m] < n) {
-            l = m + 1;
-        }
-        else {
-            last_m = m;
-            r = m - 1;
-        }
-    }
-    
-    return last_m;
-} 
-
 void solve() {
-    int n;
-    cin >> n;
-    ivec nums(n);
-    int max = -inf;
+    int x, y, k;
     
-    for (int i = 0; i < n; ++i) {
-       cin >> nums[i];
-        if (nums[i] > max) max = nums[i];
+    cin >> x >> y >> k;
+    
+    if(x >= y) {
+        print(x);
+        return;
     }
-
-    reverse(all(nums));
-    for (int i = 1; i <= max; ++i) {
-        int ix = b_search(nums, i);
-        int val = sz(nums) - ix;
-        
-        if(val != nums[n - 1 - (i - 1)]) {
-            print("NO");
+    
+    int acc = 0;
+    
+    if(x < y) {
+        if(x + k >= y) {
+            print(y);
             return;
         }
+        else acc = x + k + 2 * (y - (x + k));
+        
+        print(acc);
+        return;
     }
-
-    print("YES");
 }
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    
     int nt;
     cin >> nt;
 

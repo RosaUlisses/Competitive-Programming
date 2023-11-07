@@ -10,8 +10,6 @@
 #define has(x, y) (x.find(y) != x.end())
 #define all(x) x.begin(), x.end()
 #define sz(x) (x.size())
-#define minel(x) *min_element(all(x))
-#define maxel(x) *max_element(all(x))
 #define f first
 #define s second
 
@@ -29,52 +27,37 @@ constexpr int inf = 2e9 + 1;
 constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
-int b_search(ivec& v, int n) {
-    int l = 0, r = sz(v) - 1;
-    
-    int last_m = 0;
-    while(l <= r) {
-        int m = midp(l,r);
-        if(v[m] < n) {
-            l = m + 1;
-        }
-        else {
-            last_m = m;
-            r = m - 1;
-        }
-    }
-    
-    return last_m;
-} 
-
 void solve() {
-    int n;
-    cin >> n;
-    ivec nums(n);
-    int max = -inf;
+    int n, k, x;
+    cin >> n >> k >> x;
+
+    if (n < k || k > (x + 1)) {
+        print(-1);
+        return;
+    }
     
-    for (int i = 0; i < n; ++i) {
-       cin >> nums[i];
-        if (nums[i] > max) max = nums[i];
+
+
+    int sum = 0;
+    int count = 0;
+
+    for (int i = 0; i < k; ++i) {
+        sum += i; 
+        count++;
     }
 
-    reverse(all(nums));
-    for (int i = 1; i <= max; ++i) {
-        int ix = b_search(nums, i);
-        int val = sz(nums) - ix;
-        
-        if(val != nums[n - 1 - (i - 1)]) {
-            print("NO");
-            return;
-        }
+    for (int i = 0; i < n - count; ++i) {
+        if (k == x) {
+            sum += (x - 1);
+        } 
+        else sum += x;
     }
 
-    print("YES");
+    print(sum);
 }
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    
     int nt;
     cin >> nt;
 

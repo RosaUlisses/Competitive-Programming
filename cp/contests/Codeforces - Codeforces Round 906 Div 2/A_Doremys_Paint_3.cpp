@@ -10,8 +10,6 @@
 #define has(x, y) (x.find(y) != x.end())
 #define all(x) x.begin(), x.end()
 #define sz(x) (x.size())
-#define minel(x) *min_element(all(x))
-#define maxel(x) *max_element(all(x))
 #define f first
 #define s second
 
@@ -29,52 +27,66 @@ constexpr int inf = 2e9 + 1;
 constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
-int b_search(ivec& v, int n) {
-    int l = 0, r = sz(v) - 1;
-    
-    int last_m = 0;
-    while(l <= r) {
-        int m = midp(l,r);
-        if(v[m] < n) {
-            l = m + 1;
-        }
-        else {
-            last_m = m;
-            r = m - 1;
-        }
-    }
-    
-    return last_m;
-} 
-
 void solve() {
     int n;
     cin >> n;
-    ivec nums(n);
-    int max = -inf;
     
-    for (int i = 0; i < n; ++i) {
-       cin >> nums[i];
-        if (nums[i] > max) max = nums[i];
-    }
+    ivec v(n);
 
-    reverse(all(nums));
-    for (int i = 1; i <= max; ++i) {
-        int ix = b_search(nums, i);
-        int val = sz(nums) - ix;
+    fin(val, v) {
+        cin >> val;
+    }
+    
+    if(n == 2) {
+        print("Yes");
+        return;
+    }
+    
+    
+    map<int,int> m;
+    loop(i, n) {
+        if(!has(m, v[i])) {
+            m.insert({v[i], 1});        
+        }
+        else m[v[i]]++;
+    }
+    
+    if(sz(m) == 1) {
+        print("Yes");
+        return;
+    } 
+    
+    if(sz(m) == 2) {
+        vector<int> qtd;
+        fin(p, m) {
+            qtd.push_back(p.s); 
+        }
         
-        if(val != nums[n - 1 - (i - 1)]) {
-            print("NO");
+        if(qtd[0] > qtd[1]) {
+            if (qtd[0] == (qtd[1] + 1)) {
+                print("Yes");
+                return;
+            }
+        }
+        
+        else if(qtd[1] > qtd[0]) {
+            if (qtd[1] == (qtd[0] + 1)) {
+                print("Yes");
+                return;
+            }
+        }
+        
+        else {
+            print("Yes");
             return;
         }
     }
 
-    print("YES");
+    print("No"); 
 }
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    
     int nt;
     cin >> nt;
 

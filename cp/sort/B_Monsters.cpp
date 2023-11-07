@@ -10,8 +10,8 @@
 #define has(x, y) (x.find(y) != x.end())
 #define all(x) x.begin(), x.end()
 #define sz(x) (x.size())
-#define minel(x) *min_element(all(x))
-#define maxel(x) *max_element(all(x))
+#define min(x) *min_element(all(x))
+#define max(x) *max_element(all(x))
 #define f first
 #define s second
 
@@ -29,52 +29,35 @@ constexpr int inf = 2e9 + 1;
 constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
-int b_search(ivec& v, int n) {
-    int l = 0, r = sz(v) - 1;
-    
-    int last_m = 0;
-    while(l <= r) {
-        int m = midp(l,r);
-        if(v[m] < n) {
-            l = m + 1;
-        }
-        else {
-            last_m = m;
-            r = m - 1;
-        }
-    }
-    
-    return last_m;
-} 
-
 void solve() {
-    int n;
-    cin >> n;
-    ivec nums(n);
-    int max = -inf;
-    
+    int n, d;
+    cin >> n >> d;
+
+    vector<pair<int,int>> monsters(n);
+
     for (int i = 0; i < n; ++i) {
-       cin >> nums[i];
-        if (nums[i] > max) max = nums[i];
-    }
-
-    reverse(all(nums));
-    for (int i = 1; i <= max; ++i) {
-        int ix = b_search(nums, i);
-        int val = sz(nums) - ix;
-        
-        if(val != nums[n - 1 - (i - 1)]) {
-            print("NO");
-            return;
+        cin >> monsters[i].f;
+        if (monsters[i].f % d == 0) {
+            monsters[i].f = d;
         }
+        else  monsters[i].f = monsters[i].f % d;       
+        monsters[i].s = i;
     }
 
-    print("YES");
+    // stable sort does not change the order of elements of the same value
+    stable_sort(all(monsters), [](auto& i, auto& j) {
+        return i.f > j.f;
+    });
+
+    fin(m, monsters) {
+        print_s(m.s + 1);
+    }
+
+    print("");
 }
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    
     int nt;
     cin >> nt;
 

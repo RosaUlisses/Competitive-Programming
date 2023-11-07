@@ -1,0 +1,94 @@
+#include <bits/stdc++.h>
+
+#define endl ('\n')
+#define print(x) cout << x << endl
+#define print_s(x) cout << x << ' '
+
+#define loop(x, y) for(int x = 0; x < y; x++)
+#define fin(x, y) for(auto& x : y)
+#define midp(x, y) ((x + y) / 2)
+#define has(x, y) (x.find(y) != x.end())
+#define all(x) x.begin(), x.end()
+#define sz(x) (x.size())
+#define f first
+#define s second
+
+
+using namespace std;
+
+using ll = long long;
+using ull = unsigned long long;
+using ii = pair<int, int>;
+using ivec = vector<int>;
+using imat = vector<vector<int>>;
+using str = string;
+
+constexpr int inf = 2e9 + 1;
+constexpr int mod = 1e9 + 7;
+constexpr ll maxnum = 3e5 + 100;
+
+void solve() {
+    int sz_a, sz_x;
+    
+    cin >> sz_a >> sz_x;
+    vector<ll> a(sz_a), x(sz_x);
+    set<ll> x_vals;
+    set<int> evens;
+    
+    int ix = 0;
+    fin(v, a) {
+        cin >> v;
+        if (v % 2 == 0) {
+        }
+        ix++;
+    }
+    
+    fin(v, x) {
+        cin >> v;
+        if(!has(x_vals, v)) {
+            x_vals.insert(v);
+        }
+    }
+    
+    map<ll,ll> pows;
+    map<ll, ll> divs;
+
+    int max_val = *max_element(all(x_vals));
+    ll total = 1;
+    ll last_total = 1;
+    for (int i = 0; i <= max_val; ++i) {
+        if (has(x_vals, i)) {
+            pows.insert({i, total});
+            divs.insert({i, last_total});
+        } 
+        last_total = total;
+        total *= 2;
+    }
+    
+
+    for (auto& m: x) {
+        for (auto& val: evens) {
+           if(a[val] % pows[m] == 0) {
+                a[val] += (divs[m]); 
+           } 
+        } 
+    }
+
+    fin(val, a) {
+        print_s(val);
+    }
+    
+    cout << "\n";
+}
+
+int main() {
+    cin.tie(0)->sync_with_stdio(0);
+    int nt;
+    cin >> nt;
+
+    while (nt--) {
+        solve();
+    }
+
+    return 0;
+}

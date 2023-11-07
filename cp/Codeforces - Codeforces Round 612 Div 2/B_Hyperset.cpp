@@ -33,7 +33,6 @@ void solve() {
     for (int i = 0; i < n; ++i) {
         str s;      
         cin >> s;
-        sort(all(s));
         if(has(strs, s)) {
             strs[s]++;
         }
@@ -46,14 +45,29 @@ void solve() {
         if (p.second % 3 == 0) {
             ans += p.second / 3;
         }
+    }
+
+    vector<pair<str,int>> v;
+    for (auto& p : strs) {
+        if(v.size() < 3) {
+            v.push_back(p);
+            continue;
+        } 
         
-        strs.erase(p.first);
+        auto mp = *min_element(all(v), [](auto& p1, auto& p2) { return p1.second < p2.second; });
+
+        vector<pair<str,int>> aux;
+        for_each(all(v), [&](auto& p1) { 
+            p1.second -= mp.second; 
+            if(p1.second > 0) {
+                aux.push_back(p1);
+            }
+        });
+        
+        ans += mp.second;
+        v = aux; 
     }
     
-    
-    
-
-
     print(ans);
 }
 

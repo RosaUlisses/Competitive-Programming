@@ -29,52 +29,42 @@ constexpr int inf = 2e9 + 1;
 constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
-int b_search(ivec& v, int n) {
-    int l = 0, r = sz(v) - 1;
-    
-    int last_m = 0;
-    while(l <= r) {
-        int m = midp(l,r);
-        if(v[m] < n) {
-            l = m + 1;
-        }
-        else {
-            last_m = m;
-            r = m - 1;
-        }
-    }
-    
-    return last_m;
-} 
-
 void solve() {
-    int n;
-    cin >> n;
-    ivec nums(n);
-    int max = -inf;
+    int n, k;
+    cin >> n >> k;
     
-    for (int i = 0; i < n; ++i) {
-       cin >> nums[i];
-        if (nums[i] > max) max = nums[i];
-    }
-
-    reverse(all(nums));
-    for (int i = 1; i <= max; ++i) {
-        int ix = b_search(nums, i);
-        int val = sz(nums) - ix;
-        
-        if(val != nums[n - 1 - (i - 1)]) {
-            print("NO");
-            return;
+    ivec nums;
+    set<int> s;
+    
+    fin(num, nums) {
+        cin >> num;
+        if(!has(s, num)) {
+            s.insert(num);
         }
     }
+    
+    if(sz(s) > k) {
+        print(-1);
+    }
+   
+    ivec rv = nums;
+    reverse(all(rv));
 
-    print("YES");
+    fin(val, rv) {
+        nums.push_back(val);
+    }
+
+    print(sz(nums));
+    
+    fin(val, nums) {
+        print_s(val);     
+    }
+
+    print("");
 }
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    
     int nt;
     cin >> nt;
 

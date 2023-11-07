@@ -10,8 +10,6 @@
 #define has(x, y) (x.find(y) != x.end())
 #define all(x) x.begin(), x.end()
 #define sz(x) (x.size())
-#define minel(x) *min_element(all(x))
-#define maxel(x) *max_element(all(x))
 #define f first
 #define s second
 
@@ -29,52 +27,54 @@ constexpr int inf = 2e9 + 1;
 constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
-int b_search(ivec& v, int n) {
-    int l = 0, r = sz(v) - 1;
-    
-    int last_m = 0;
-    while(l <= r) {
-        int m = midp(l,r);
-        if(v[m] < n) {
-            l = m + 1;
-        }
-        else {
-            last_m = m;
-            r = m - 1;
-        }
-    }
-    
-    return last_m;
-} 
-
 void solve() {
     int n;
     cin >> n;
     ivec nums(n);
-    int max = -inf;
     
-    for (int i = 0; i < n; ++i) {
-       cin >> nums[i];
-        if (nums[i] > max) max = nums[i];
+    fin(v, nums) {
+        cin >> v;
     }
 
-    reverse(all(nums));
-    for (int i = 1; i <= max; ++i) {
-        int ix = b_search(nums, i);
-        int val = sz(nums) - ix;
-        
-        if(val != nums[n - 1 - (i - 1)]) {
-            print("NO");
-            return;
-        }
+    int max_m = 0;
+    int val = 1;
+   
+    while(val * 2 <= n) {
+        max_m++;
+        val *= 2;
     }
 
+    if (val < sz(nums) - 1) {
+        for (int i = val; i < sz(nums); ++i) {
+            if(i + 1 >= sz(nums)) {
+                break;
+            }
+            if(nums[i] > nums[i + 1]) {
+                print("NO");
+                return;
+            }     
+        } 
+    }
+
+    for (int i = 1; i <= max_m; ++i) {
+        int start = pow(2, i);
+        int end = 2 * start;
+        for (int j = start; j < end - 1; ++j) {
+            if (j + 1 >= sz(nums)) {
+                break;
+            }
+            if (nums[j] > nums[j + 1]) {
+                print("NO");
+                return;
+            } 
+        } 
+    }
+    
     print("YES");
 }
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    
     int nt;
     cin >> nt;
 

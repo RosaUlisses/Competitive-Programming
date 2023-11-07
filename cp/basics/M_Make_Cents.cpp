@@ -29,52 +29,33 @@ constexpr int inf = 2e9 + 1;
 constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
-int b_search(ivec& v, int n) {
-    int l = 0, r = sz(v) - 1;
-    
-    int last_m = 0;
-    while(l <= r) {
-        int m = midp(l,r);
-        if(v[m] < n) {
-            l = m + 1;
-        }
-        else {
-            last_m = m;
-            r = m - 1;
-        }
-    }
-    
-    return last_m;
-} 
-
 void solve() {
-    int n;
-    cin >> n;
-    ivec nums(n);
-    int max = -inf;
+    int nc, ncomp;
+    cin >> nc >> ncomp;
+
+    unordered_map<str, double> cval;
+    for (int i = 0; i < nc; ++i) {
+        str cur; 
+        double val;
+        cin >> cur >> val;
+        cval[cur] = val;
+    }
     
-    for (int i = 0; i < n; ++i) {
-       cin >> nums[i];
-        if (nums[i] > max) max = nums[i];
-    }
+    cval["JD"] = 1;
 
-    reverse(all(nums));
-    for (int i = 1; i <= max; ++i) {
-        int ix = b_search(nums, i);
-        int val = sz(nums) - ix;
-        
-        if(val != nums[n - 1 - (i - 1)]) {
-            print("NO");
-            return;
-        }
+    long double ans = 0.0;
+    for (int i = 0; i < ncomp; ++i) {
+        double val; 
+        str cur;
+        cin >> val >> cur;
+        ans += (cval[cur] * val);
     }
-
-    print("YES");
+    
+    std::cout << std::fixed << std::setprecision(6) << ans << endl; 
 }
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
-    
     int nt;
     cin >> nt;
 
