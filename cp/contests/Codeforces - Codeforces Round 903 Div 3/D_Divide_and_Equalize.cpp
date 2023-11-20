@@ -18,15 +18,39 @@ constexpr int inf = 2e9 + 1;
 constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
+int trial(int n) {
+    int count = 0;
+
+    for (int i = 2; i * i < n; ++i) {
+        while(n % i == 0) {
+            count++;
+            n /= i;
+        }
+    }
+    
+    if(n > 1) count++;
+    
+    return count;
+}
+
 void solve() {
     int n;
     cin >> n;
     ivec nums(n);
+    map<int,int> divs;
     for (auto& i: nums) {
         cin >> i; 
+        divs[i] = trial(i); 
     }
-    
-    nfkk
+
+    for (auto& val: divs) {
+        if(val.second % n != 0) {
+            print("NO");
+            return;
+        }
+    }
+
+    print("YES");
 }
 
 int main() {

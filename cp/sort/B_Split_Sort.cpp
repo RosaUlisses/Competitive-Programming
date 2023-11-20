@@ -30,11 +30,35 @@ constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
 void solve() {
+    int n;
+    cin >> n;
+    ivec nums(n);
+    
+    fin(val, nums) {
+        cin >> val;
+    }
+    
+    set<int> ps;
+    int count = n - 1;
+    ps.insert(nums[0]);
+    for (int i = 1; i < n; ++i) {
+        int m = minel(ps);  
+        if(m < nums[i]) {
+            count--;
+        }
+        ps.erase(m);
+    }
 
+    print(count);
 }
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+#endif
+
     int nt;
     cin >> nt;
 

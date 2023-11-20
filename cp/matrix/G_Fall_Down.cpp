@@ -30,11 +30,43 @@ constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
 void solve() {
+    int ni, nj;
+    cin >> ni >> nj;
+    vector<vector<char>> mat(ni, vector<char>(nj, '.'));
 
+    for (int i = 0; i < ni; ++i) {
+        for (int j = 0; j < nj; ++j) {
+            cin >> mat[i][j]; 
+        } 
+    }
+
+    for (int i = 0; i < ni; ++i) {
+        int f = -1;
+        for (int j = nj - 1; j >= 0; --j) {
+            if (mat[j][i] == '.' && f == -1) f = j;
+            if (mat[j][i] == 'o') f = -1;
+            if(mat[j][i] == '*') {
+                mat[j][i] = '.';
+                mat[f][i] = '*';
+            } 
+        } 
+    }
+    
+    fin(r, mat) {
+        fin(val, r) {
+            cout << val;
+        }
+        cout << endl; 
+    }
 }
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
+
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+#endif
+
     int nt;
     cin >> nt;
 

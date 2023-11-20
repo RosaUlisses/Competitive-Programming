@@ -29,57 +29,58 @@ constexpr int inf = 2e9 + 1;
 constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
-void dfs(map<int, ivec>& tree, int vertex, set<int>& visited, vector<vector<int>>& paths, vector<int>& curr) {
-    visited.insert(vertex); 
-    curr.push_back(vertex);
+
+void solve() {
+    int n;
+    cin >> n;
+    ivec nums(n);
+    map<int,int> m;
+
+    for (int i = 0; i < n; ++i) {
+        cin >> nums[i];
+        if(!has(m,nums[i])) m[nums[i]] = 1;
+        else m[nums[i]]++;
+    }
     
-    if(tree[vertex].empty()) {
-        paths.push_back(curr);
-        curr.clear();
+    int sim = 0;
+    vector<int> simples;
+    fin(p, m) {
+        if (p.s >= 2) {
+            sim++; 
+            simples.push_back(p.f);
+        } 
+    }
+    
+    if(sim < 2) {
+        print(-1);
         return;
     }
 
-    fin(v, tree[vertex]) {
-        if(has(visited, v)) continue;
-        dfs(tree, v, visited, paths, curr);
-    }
-}
 
-void solve() { 
-    int n;
-    cin >> n;
-    
-    int root;
-    map<int, ivec> tree;
-
-    for (int i = 1; i <= n; ++i) {
-        int val; 
-        cin >> val;
-        if(i == val){
-            root = i; 
-            continue;
-        } 
-        if (!has(tree, val)) {
-            tree[val] = { i };
+    int count1 = 0;
+    int count2 = 0;
+    for (int i = 0; i < n; ++i) {
+        if (nums[i] == simples[0]) {
+            if(count1 == 0 || count1 > 1) {
+                nums[i] = 1;
+            } 
+            else nums[i] = 2; 
+            count1++;
         }
-        else tree[val].push_back(i);
-    }
-    
-    vector<vector<int>> paths;
-    vector<int> curr;
-    set<int> visited;
-
-    dfs(tree, root, visited, paths, curr);
-
-    print(sz(paths));
-    
-    fin(p, paths) {
-        print(sz(p));
-        fin(v, p) {
-            print_s(v);
+        else if (nums[i] == simples[1]) {
+            if(count2 == 0 || count2 > 1) {
+                nums[i] = 2;
+            }
+            else nums[i] = 3;
+            count2++;
         }
-        print("");
+        else nums[i] = 1;
     }
+
+    fin(v, nums) {
+        print_s(v);
+    }
+    print("");
 }
 
 int main() {

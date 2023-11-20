@@ -52,14 +52,11 @@ void solve() {
     int root;
     map<int, ivec> tree;
 
-    for (int i = 1; i <= n; ++i) {
+    for (int i = 0; i < n; ++i) {
         int val; 
         cin >> val;
-        if(i == val){
-            root = i; 
-            continue;
-        } 
-        if (!has(tree, val)) {
+        if(i == val) root = i;
+        if (!has(tree, i)) {
             tree[val] = { i };
         }
         else tree[val].push_back(i);

@@ -29,57 +29,36 @@ constexpr int inf = 2e9 + 1;
 constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 3e5 + 100;
 
-void dfs(map<int, ivec>& tree, int vertex, set<int>& visited, vector<vector<int>>& paths, vector<int>& curr) {
-    visited.insert(vertex); 
-    curr.push_back(vertex);
+void solve() {
+    int n, d, h;
+    cin >> n >> d >> h;
     
-    if(tree[vertex].empty()) {
-        paths.push_back(curr);
-        curr.clear();
-        return;
-    }
+    ivec hbs(n);
+    fin(val, hbs) cin >> val;
 
-    fin(v, tree[vertex]) {
-        if(has(visited, v)) continue;
-        dfs(tree, v, visited, paths, curr);
-    }
-}
-
-void solve() { 
-    int n;
-    cin >> n;
-    
-    int root;
-    map<int, ivec> tree;
-
-    for (int i = 1; i <= n; ++i) {
-        int val; 
-        cin >> val;
-        if(i == val){
-            root = i; 
+    int l = -1;
+    double area = 0.0;
+    for (int i = sz(hbs) - 1; i >= 0; --i) {
+        if(l == -1) {
+            area += (h * d / 2);
+            l = hbs[i];
             continue;
-        } 
-        if (!has(tree, val)) {
-            tree[val] = { i };
         }
-        else tree[val].push_back(i);
-    }
-    
-    vector<vector<int>> paths;
-    vector<int> curr;
-    set<int> visited;
-
-    dfs(tree, root, visited, paths, curr);
-
-    print(sz(paths));
-    
-    fin(p, paths) {
-        print(sz(p));
-        fin(v, p) {
-            print_s(v);
+        
+        int th = hbs[i] + h; 
+        if(th > l) {
+            int nh = (th - (th - l));
+            int sb = d - 2 * nh; 
+            area += ((sb + d) * h / 2);
+            l = hbs[i];
+            continue;
         }
-        print("");
+
+        area += (h * d / 2);
+        l = hbs[i];
     }
+
+    print(area);
 }
 
 int main() {
