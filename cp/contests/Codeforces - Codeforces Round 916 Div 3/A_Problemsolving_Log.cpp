@@ -30,26 +30,18 @@ constexpr ll maxnum = 2e9 + 1;
 
 
 void solve() {
-    int n, k;
-    cin >> n >> k;
-    ivec a(n), b(n);
-    fin(v, a) cin >> v;
-    fin(v, b) cin >> v;
+    int n, nex;
+    cin >> n >> nex;
 
-    int ss = 0, m = -inf, max_tot = -inf;
-
-    for (int i = 0; i < k; ++i) {
-        if (i < n) {
-            ss += a[i];
-            m = max(m, b[i]);
-            int repeats = m * (k - i - 1) > 0 ? m * (k - i - 1) : 0;
-            int val = ss + repeats;
-            max_tot = max(max_tot, val);
-        }
+    for (int i = 0; i < n - nex - 1; ++i) {
+        print_s(n - i);
     }
 
+    for (int i = 1; i <= nex + 1; ++i) {
+        print_s(i);
+    }
 
-    print(max_tot);
+    print_s("");
 }
 
 int main() {

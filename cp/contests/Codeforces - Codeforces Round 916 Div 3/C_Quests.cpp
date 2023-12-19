@@ -35,19 +35,15 @@ void solve() {
     ivec a(n), b(n);
     fin(v, a) cin >> v;
     fin(v, b) cin >> v;
+    
+    int s = 0, m = -inf, max_tot = -inf;
 
-    int ss = 0, m = -inf, max_tot = -inf;
-
-    for (int i = 0; i < k; ++i) {
-        if (i < n) {
-            ss += a[i];
-            m = max(m, b[i]);
-            int repeats = m * (k - i - 1) > 0 ? m * (k - i - 1) : 0;
-            int val = ss + repeats;
-            max_tot = max(max_tot, val);
-        }
+    for (int i = 0; i < n; ++i) {
+        s += a[i]; 
+        m = max(m, b[i]);
+        int val = s + m * (n - i);
+        max_tot = max(max_tot, val);
     }
-
 
     print(max_tot);
 }
