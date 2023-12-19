@@ -30,45 +30,25 @@ constexpr ll maxnum = 2e9 + 1;
 
 
 void solve() {
-    int n;
-    cin >> n;
+    int n, m;
+    cin >> n >> m;
     
-    ivec nums(n);
-    fin(val, nums) cin >> val;
-
-    bool sorted = true;
-    for (int i = 0; i < n - 1; ++i) {
-        if(nums[i] > nums[i + 1]) {
-            sorted = false;
-        }
-    }
-    
-    if(sorted) {
-        print("YES");
-        return;
-    }
-
-    for (int j = 0; j < n; ++j) {
-        for (int i = 1; i < n - 1; ++i) {
-            if (nums[i] > nums[i + 1] && nums[i - 1] < nums[i]) {
-                int aux = nums[i];
-                nums[i] = nums[i + 1];
-                nums[i + 1] = aux;
-                i++;
-            }
-        }   
-    }
-
-           
-     
-    for (int i = 0; i < n - 1; ++i) {
-        if(nums[i] > nums[i + 1]) {
-            print("NO");
-            return;
+    imat c(n, vector<int>(m));
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            cin >> c[i][j]; 
         } 
     }
+    
+    ll pot = 0;
+    
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            pot += abs(c[j][i] - c[j + 1][i]); 
+        }
+    }
 
-    print("YES");
+    print(pot); 
 }
 
 int main() {

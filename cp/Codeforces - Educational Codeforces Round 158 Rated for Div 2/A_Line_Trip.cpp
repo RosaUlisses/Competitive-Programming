@@ -30,45 +30,26 @@ constexpr ll maxnum = 2e9 + 1;
 
 
 void solve() {
-    int n;
-    cin >> n;
+    int n, x;
+    cin >> n >> x;
     
-    ivec nums(n);
-    fin(val, nums) cin >> val;
-
-    bool sorted = true;
-    for (int i = 0; i < n - 1; ++i) {
-        if(nums[i] > nums[i + 1]) {
-            sorted = false;
-        }
-    }
+    ivec gs(n);
+    fin(val, gs) cin >> val;
     
-    if(sorted) {
-        print("YES");
-        return;
-    }
-
-    for (int j = 0; j < n; ++j) {
-        for (int i = 1; i < n - 1; ++i) {
-            if (nums[i] > nums[i + 1] && nums[i - 1] < nums[i]) {
-                int aux = nums[i];
-                nums[i] = nums[i + 1];
-                nums[i + 1] = aux;
-                i++;
-            }
-        }   
-    }
-
-           
-     
+    int max = gs[0];
     for (int i = 0; i < n - 1; ++i) {
-        if(nums[i] > nums[i + 1]) {
-            print("NO");
-            return;
+        if(gs[i + 1] - gs[i] > max) {
+            max = gs[i + 1] - gs[i];
         } 
     }
-
-    print("YES");
+    
+    int last = 2 * (x - gs[n - 1]);
+    
+    if(last > max) {
+        max = last;
+    }
+    
+    print(max);
 }
 
 int main() {

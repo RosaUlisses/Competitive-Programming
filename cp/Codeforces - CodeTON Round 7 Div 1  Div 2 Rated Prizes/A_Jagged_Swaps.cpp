@@ -36,31 +36,17 @@ void solve() {
     ivec nums(n);
     fin(val, nums) cin >> val;
 
-    bool sorted = true;
-    for (int i = 0; i < n - 1; ++i) {
-        if(nums[i] > nums[i + 1]) {
-            sorted = false;
+     
+    for (int i = 1; i < n; ++i) {
+        if (nums[i] > nums[i + 1]) {
+            int aux = nums[i];
+            nums[i] = nums[i + 1];         
+            nums[i + 1] = aux;
+            i++;
         }
     }
-    
-    if(sorted) {
-        print("YES");
-        return;
-    }
 
-    for (int j = 0; j < n; ++j) {
-        for (int i = 1; i < n - 1; ++i) {
-            if (nums[i] > nums[i + 1] && nums[i - 1] < nums[i]) {
-                int aux = nums[i];
-                nums[i] = nums[i + 1];
-                nums[i + 1] = aux;
-                i++;
-            }
-        }   
-    }
 
-           
-     
     for (int i = 0; i < n - 1; ++i) {
         if(nums[i] > nums[i + 1]) {
             print("NO");

@@ -32,43 +32,24 @@ constexpr ll maxnum = 2e9 + 1;
 void solve() {
     int n;
     cin >> n;
+    str ss;
+    cin >> ss;
     
-    ivec nums(n);
-    fin(val, nums) cin >> val;
+    set<str> set = {ss.substr(2, sz(ss) - 2)};
 
-    bool sorted = true;
-    for (int i = 0; i < n - 1; ++i) {
-        if(nums[i] > nums[i + 1]) {
-            sorted = false;
-        }
-    }
-    
-    if(sorted) {
-        print("YES");
-        return;
-    }
-
-    for (int j = 0; j < n; ++j) {
-        for (int i = 1; i < n - 1; ++i) {
-            if (nums[i] > nums[i + 1] && nums[i - 1] < nums[i]) {
-                int aux = nums[i];
-                nums[i] = nums[i + 1];
-                nums[i + 1] = aux;
-                i++;
-            }
-        }   
-    }
-
+    for (int i = 1; i < n; ++i) {
+        if (i + 1 < n) {
+           str l = ss.substr(0, i - 1); 
+           str r = ss.substr(i + 2, sz(ss) - (i + 2)); 
            
-     
-    for (int i = 0; i < n - 1; ++i) {
-        if(nums[i] > nums[i + 1]) {
-            print("NO");
-            return;
+           str tot = l + r;
+           if(!has(set, tot)) {
+               set.insert(tot);
+           }
         } 
     }
 
-    print("YES");
+    print(sz(set));
 }
 
 int main() {
