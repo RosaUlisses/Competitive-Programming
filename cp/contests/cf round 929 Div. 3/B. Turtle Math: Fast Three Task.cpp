@@ -30,41 +30,51 @@ constexpr ll maxnum = 2e9 + 1;
 
 
 void solve() {
-    int n;
-    cin >> n;
-    str ss;
-    cin >> ss;
-    
-    set<str> set = {ss.substr(2, sz(ss) - 2)};
+  int n;      
+  cin >> n;
 
-    for (int i = 1; i < n; ++i) {
-        if (i + 1 < n) {
-           str l = ss.substr(0, i - 1); 
-           str r = ss.substr(i + 2, sz(ss) - (i + 2)); 
-           
-           str tot = l + r;
-           if(!has(set, tot)) {
-               set.insert(tot);
-           }
-        } 
-    }
+  int sum = 0;
+  set<int> mods;
+  for(int i = 0; i < n; i++) {
+    int val;
+    cin >> val;
+    int m = val % 3;
+    sum += m;
+    mods.insert(m);
+  }
 
-    print(sz(set));
+  if(sum % 3 == 0) {
+    print(0);
+    return;
+  }
+
+  if(sum % 3 == 2) {
+    print(1);
+    return;
+  }
+
+  if(has(mods, sum % 3)) {
+    print(1);
+    return;
+  }
+  
+  print(2);
 }
 
 int main() {
-    cin.tie(0)->sync_with_stdio(0);
+  cin.tie(0)->sync_with_stdio(0);
 
-#ifndef ONLINE_JUDGE
+  #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
-#endif
+    freopen("output.txt", "w", stdout);
+  #endif
 
-    int nt;
-    cin >> nt;
+  int nt;
+  cin >> nt;
 
-    while (nt--) {
-        solve();
-    }
+  while (nt--) {
+      solve();
+  }
 
-    return 0;
+  return 0;
 }

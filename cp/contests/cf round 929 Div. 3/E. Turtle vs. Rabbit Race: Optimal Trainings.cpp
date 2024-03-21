@@ -30,40 +30,23 @@ constexpr ll maxnum = 2e9 + 1;
 
 
 void solve() {
-    int n, m;
-    cin >> n >> m;
-    
-    imat c(n, vector<int>(m));
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < m; ++j) {
-            cin >> c[i][j]; 
-        } 
-    }
-    
-    ll pot = 0;
-    
-    for (int i = 0; i < m; ++i) {
-        for (int j = 0; j < n; ++j) {
-            pot += abs(c[j][i] - c[j + 1][i]); 
-        }
-    }
-
-    print(pot); 
+      
 }
 
 int main() {
-    cin.tie(0)->sync_with_stdio(0);
+  cin.tie(0)->sync_with_stdio(0);
 
-#ifndef ONLINE_JUDGE
+  #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
-#endif
+    freopen("output.txt", "w", stdout);
+  #endif
 
-    int nt;
-    cin >> nt;
+  int nt;
+  cin >> nt;
 
-    while (nt--) {
-        solve();
-    }
+  while (nt--) {
+      solve();
+  }
 
-    return 0;
+  return 0;
 }

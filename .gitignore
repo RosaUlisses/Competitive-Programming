@@ -15,3 +15,7 @@ Competitive-Programming/cmake-build-debug
 Competitive-Programming/CMakeLists.txt
 CMakeLists.txt
 *.exe
+Competitive-Programming/input.txt
+Competitive-Programming/output.txt
+Competitive-Programming/error.txt
+

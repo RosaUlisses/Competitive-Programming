@@ -30,41 +30,41 @@ constexpr ll maxnum = 2e9 + 1;
 
 
 void solve() {
-    int n, k;
-    cin >> n >> k;
-    ivec a(n), b(n);
-    fin(v, a) cin >> v;
-    fin(v, b) cin >> v;
+  int n, m, k;      
+  cin >> n >> m >> k;
 
-    int ss = 0, m = -inf, max_tot = -inf;
+  vector<int> b(n), c(m);
 
-    for (int i = 0; i < k; ++i) {
-        if (i < n) {
-            ss += a[i];
-            m = max(m, b[i]);
-            int repeats = m * (k - i - 1) > 0 ? m * (k - i - 1) : 0;
-            int val = ss + repeats;
-            max_tot = max(max_tot, val);
-        }
+  fin(v, b) cin >> v;
+  fin(v, c) cin >> v;
+  
+  int ans = 0;
+
+  fin(v, b) {
+    fin(v2, c) {
+      if(v + v2 <= k) {
+        ans++;
+      }
     }
+  }
 
-
-    print(max_tot);
+  print(ans);
 }
 
 int main() {
-    cin.tie(0)->sync_with_stdio(0);
+  cin.tie(0)->sync_with_stdio(0);
 
-#ifndef ONLINE_JUDGE
+  #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
-#endif
+    freopen("output.txt", "w", stdout);
+  #endif
 
-    int nt;
-    cin >> nt;
+  int nt;
+  cin >> nt;
 
-    while (nt--) {
-        solve();
-    }
+  while (nt--) {
+      solve();
+  }
 
-    return 0;
+  return 0;
 }

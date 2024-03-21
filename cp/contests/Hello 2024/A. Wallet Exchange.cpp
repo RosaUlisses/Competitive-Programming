@@ -1,21 +1,10 @@
 #include <bits/stdc++.h>
-#ifndef ONLINE_JUDGE
-  #include "/home/ullas/Programming/Competitive-Programming/cp/debug.h"
-#endif
-
-#ifdef ONLINE_JUDGE
-  #define dbg(...) 
-#endif
 
 #define endl ('\n')
-auto print_values = [](auto&&... args) {
-    bool first = true;
-    ((std::cout << (first ? "" : ", ") << args, first = false), ...); std::cout << endl;
-};
-#define print(...) print_values(__VA_ARGS__);  
+#define print(x) cout << x << endl
+#define print_s(x) cout << x << ' '
 
 #define fin(x, y) for(auto& x : y)
-#define fint(i, s, n) for(int i = s; i < n; i++)
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
 #define all(x) x.begin(), x.end()
@@ -41,7 +30,30 @@ constexpr ll maxnum = 2e9 + 1;
 
 
 void solve() {
-      
+  int a, b;      
+  cin >> a >> b;
+  
+  if(a == b) {
+    print("Bob");
+    return;
+  }
+
+  if(a > b) {
+    int val = a - b;
+    if(val % 2 == 0) {
+      print("Bob");
+    }
+    else print("Alice");
+  }
+  else {
+    int val = b - a;
+    if(val % 2 == 0) {
+      print("Bob");
+    }
+    else print("Alice");
+
+  }
+
 }
 
 int main() {
@@ -50,7 +62,6 @@ int main() {
   #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
-    freopen("error.txt", "w", stderr);
   #endif
 
   int nt;

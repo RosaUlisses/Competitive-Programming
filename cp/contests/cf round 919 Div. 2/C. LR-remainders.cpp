@@ -30,46 +30,54 @@ constexpr ll maxnum = 2e9 + 1;
 
 
 void solve() {
-    int n;
-    cin >> n;
-    
-    ivec nums(n);
-    fin(val, nums) cin >> val;
+  ll n, m;      
+  cin >> n >> m;
+  vector<ll> nums(n);
+  fin(v, nums) cin >> v;
+  string cm;
+  cin >> cm;
 
-     
-    for (int i = 1; i < n; ++i) {
-        if (nums[i] > nums[i + 1]) {
-            int aux = nums[i];
-            nums[i] = nums[i + 1];         
-            nums[i + 1] = aux;
-            i++;
-        }
+  ll p = 1;
+  fin(v, nums) p *= v;
+
+  int b = 0, e = n - 1;
+
+  vector<ll> ans;
+
+  fin(c, cm) {
+    if(c == 'L') {
+      ans.push_back(p % m);
+      b++;
+      p /= nums[b - 1];
     }
-
-
-    for (int i = 0; i < n - 1; ++i) {
-        if(nums[i] > nums[i + 1]) {
-            print("NO");
-            return;
-        } 
+    else {
+      ans.push_back(p % m);
+      e--; 
+      p /= nums[e + 1];
     }
+  }
 
-    print("YES");
+  fin(v, ans) {
+    print_s(v);
+  }
+
+  print("");
 }
 
 int main() {
-    cin.tie(0)->sync_with_stdio(0);
+  cin.tie(0)->sync_with_stdio(0);
 
-#ifndef ONLINE_JUDGE
+  #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
-#endif
+    freopen("output.txt", "w", stdout);
+  #endif
 
-    int nt;
-    cin >> nt;
+  int nt;
+  cin >> nt;
 
-    while (nt--) {
-        solve();
-    }
+  while (nt--) {
+      solve();
+  }
 
-    return 0;
+  return 0;
 }

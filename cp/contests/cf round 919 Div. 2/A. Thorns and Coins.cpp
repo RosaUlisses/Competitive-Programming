@@ -30,41 +30,39 @@ constexpr ll maxnum = 2e9 + 1;
 
 
 void solve() {
-    int n, x;
-    cin >> n >> x;
-    
-    ivec gs(n);
-    fin(val, gs) cin >> val;
-    
-    int max = gs[0];
-    for (int i = 0; i < n - 1; ++i) {
-        if(gs[i + 1] - gs[i] > max) {
-            max = gs[i + 1] - gs[i];
-        } 
+  int n;
+  cin >> n;
+  string ss;
+  cin >> ss;
+
+  int ans = 0;
+  for(int i = 0; i < n; i++) {
+    if(ss[i] == '@') {
+      ans++;
     }
     
-    int last = 2 * (x - gs[n - 1]);
-    
-    if(last > max) {
-        max = last;
+    if(ss[i] == '*' && i + 1 < n) {
+      if(ss[i + 1] == '*') break;
     }
-    
-    print(max);
+  }
+
+  print(ans); 
 }
 
 int main() {
-    cin.tie(0)->sync_with_stdio(0);
+  cin.tie(0)->sync_with_stdio(0);
 
-#ifndef ONLINE_JUDGE
+  #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
-#endif
+    freopen("output.txt", "w", stdout);
+  #endif
 
-    int nt;
-    cin >> nt;
+  int nt;
+  cin >> nt;
 
-    while (nt--) {
-        solve();
-    }
+  while (nt--) {
+      solve();
+  }
 
-    return 0;
+  return 0;
 }

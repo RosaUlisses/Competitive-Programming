@@ -1,21 +1,10 @@
 #include <bits/stdc++.h>
-#ifndef ONLINE_JUDGE
-  #include "/home/ullas/Programming/Competitive-Programming/cp/debug.h"
-#endif
-
-#ifdef ONLINE_JUDGE
-  #define dbg(...) 
-#endif
 
 #define endl ('\n')
-auto print_values = [](auto&&... args) {
-    bool first = true;
-    ((std::cout << (first ? "" : ", ") << args, first = false), ...); std::cout << endl;
-};
-#define print(...) print_values(__VA_ARGS__);  
+#define print(x) cout << x << endl
+#define print_s(x) cout << x << ' '
 
 #define fin(x, y) for(auto& x : y)
-#define fint(i, s, n) for(int i = s; i < n; i++)
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
 #define all(x) x.begin(), x.end()
@@ -39,9 +28,45 @@ constexpr int inf = 3e5 + 100;
 constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 2e9 + 1;
 
+map<int,int> trial(int n) {
+  map<int,int> fc;
+  for (int d = 2; d * d <= n; d++) {
+      while (n % d == 0) {
+          if(!has(fc, d)) fc[d] = 1;
+          else fc[d]++;
+          n /= d;
+      }
+  }
+  if (n > 1)
+    fc[n] = 1;
+
+  return fc;
+}
+
+int extract(map<int,int> m, int v) {
+  if(has(m, v)) {
+    return m[v] + 1;
+  }
+
+  return 1;
+}
+
 
 void solve() {
-      
+  int a, b, l; 
+  cin >> a >> b >> l;
+  
+  map<int,int> fc = trial(l);
+
+  if(a == b) {
+    int ans = fc[a] / 2 + 1 + (fc[a] - 1) / 2 + 1; 
+    print(ans);
+    return;
+  }
+
+  int ans = extract(fc, a) * extract(fc, b); 
+
+  print(ans);
 }
 
 int main() {
@@ -50,7 +75,6 @@ int main() {
   #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
-    freopen("error.txt", "w", stderr);
   #endif
 
   int nt;
