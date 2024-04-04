@@ -62,77 +62,33 @@ void solve() {
   ll a, b, l; 
   cin >> a >> b >> l;
 
-  auto da = trial(a);
-  auto db = trial(b);
-  auto dl = trial(l);
+  set<int> ans;
 
-  dbg(da);
-  dbg(dl);
+  // the max exponent for A is 34
+  for(int i = 0; i <= 34; i++) {
+    int x = l;
+    bool fail = false;
 
-  int ma = inf;
-  fin(d, da) {
-    if(!has(dl, d.f)) ma = 0;
-    else {
-      ma = min(ma, dl[d.f] / d.s);
+    for(int _ = 0; _ < i; _++) {
+      if(x % a != 0) {
+        fail = true;
+        break;
+      }
+      x /= a;
+    }
+
+    /*
+     * For each possible exponent of A we are calculating the possible exponents for B 
+     */
+    if(fail) break;
+    while(true) {
+      ans.insert(x);
+      if(x % b != 0) break;
+      x /= b;
     }
   }
 
-  dbg(ma);
-
-  int mb = inf;
-  fin(d, db) {
-    if(!has(dl, d.f)) mb = 0;
-    else {
-      mb = min(mb, dl[d.f] / d.s);
-    }
-  }
-
-  if(ma == 0 && mb == 0) {
-    print(1);
-    return;
-  } 
-
-  set<ll> us;
-
-  set<pair<int,int>> uss;
-
-  ll ans = 0;
-
-  vector<ll> pa(ma + 1, -1);
-  vector<ll> pb(mb + 1, -1);
-
-  pa[0] = 1;
-  pb[0] = 1;
-
-  for(int i = 0; i <= ma; i++) {
-    for(int j = 0; j <= mb; j++) {
-      dbg(i, j);
-      ll ra;
-      if(pa[i] == -1) {
-        ra = pa[i - 1] * a;
-        pa[i] = ra;
-      }
-      else ra = pa[i];
-      ll rb;
-      if(pb[j] == -1) {
-        rb = pb[j - 1] * b;
-        pb[j] = rb;
-      }
-      else rb = pb[j];
-
-      ll p = ra * rb;
-
-      
-      pair<int,int> ip = {i, j};
-      if(p <= l && l % p == 0 && !has(us, p)) {
-        us.insert(p);
-      }
-    }
-  }
-
-  dbg(sz(us));
-
-  print(sz(us));
+  print(sz(ans));
 }
 
 int main() {
@@ -140,7 +96,7 @@ int main() {
 
   #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
+    /* freopen("output.txt", "w", stdout); */
     freopen("error.txt", "w", stderr);
   #endif
 
