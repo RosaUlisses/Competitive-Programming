@@ -1,16 +1,16 @@
 #include <bits/stdc++.h>
 #ifndef ONLINE_JUDGE
-  #include "/home/ullas/Programming/Competitive-Programming/cp/debug.h"
+#include "/home/ullas/Programming/Competitive-Programming/cp/debug.h"
 #endif
 
 #ifdef ONLINE_JUDGE
-  #define dbg(...) 
+#define dbg(...) 
 #endif
 
 #define endl ('\n')
 auto print_values = [](auto&&... args) {
-    bool first = true;
-    ((std::cout << (first ? "" : ", ") << args, first = false), ...); std::cout << endl;
+  bool first = true;
+  ((std::cout << (first ? "" : ", ") << args, first = false), ...); std::cout << endl;
 };
 #define print(...) print_values(__VA_ARGS__);  
 
@@ -58,13 +58,10 @@ map<int, int> trial(ll n) {
 }
 
 void solve() {
-       
   ll a, b, l; 
   cin >> a >> b >> l;
 
   set<int> ans;
-
-  // the max exponent for A is 34
   for(int i = 0; i <= 34; i++) {
     int x = l;
     bool fail = false;
@@ -76,10 +73,6 @@ void solve() {
       }
       x /= a;
     }
-
-    /*
-     * For each possible exponent of A we are calculating the possible exponents for B 
-     */
     if(fail) break;
     while(true) {
       ans.insert(x);
@@ -94,11 +87,11 @@ void solve() {
 int main() {
   cin.tie(0)->sync_with_stdio(0);
 
-  #ifndef ONLINE_JUDGE
+#ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     /* freopen("output.txt", "w", stdout); */
     freopen("error.txt", "w", stderr);
-  #endif
+#endif
 
   int nt;
   cin >> nt;
@@ -107,5 +100,5 @@ int main() {
       solve();
   }
 
-  return 0;
+return 0;
 }
