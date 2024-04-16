@@ -15,11 +15,9 @@ auto print_values = [](auto&&... args) {
 #define print(...) print_values(__VA_ARGS__);  
 
 #define fin(x, y) for(auto& x : y)
-#define rep(i, s, n) for(auto i = s; i < n; i++)
-#define reprv(i, s, n) for(auto i = s; i >= n; i--)
+#define fint(i, s, n) for(int i = s; i < n; i++)
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
-#define addm(x, y) if(!has(x, y)) { x[y] = 1; } else { x[y]++; }
 #define all(x) x.begin(), x.end()
 #define sz(x) (x.size())
 #define minel(x) *min_element(all(x))
@@ -43,7 +41,38 @@ constexpr ll maxnum = 2e9 + 1;
 
 
 void solve() {
-      
+  int n;      
+  cin >> n;
+
+  map<int,int> mp;
+
+  for(int i = 0; i < n; i++) {
+    int val;
+    cin >> val;
+    if(!has(mp, val)) mp[val] = 1;
+    else mp[val]++;
+  }
+
+  ivec ns;
+  fin(p, mp) ns.push_back(p.f);
+
+  int ans = mp[ns[0]];
+  int l = mp[ns[0]];
+  for(int i = 1; i < sz(ns); i++) {
+    if(mp[ns[i]] > l && ns[i] - 1 == ns[i - 1]) {
+      ans += (mp[ns[i]] - l);
+    } 
+
+    dbg(mp[ns[i]], l);
+
+    if(ns[i] - 1 != ns[i - 1]) {
+      ans += mp[ns[i]];
+    }
+
+    l = mp[ns[i]];
+  }
+
+  print(ans);
 }
 
 int main() {

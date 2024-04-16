@@ -15,11 +15,9 @@ auto print_values = [](auto&&... args) {
 #define print(...) print_values(__VA_ARGS__);  
 
 #define fin(x, y) for(auto& x : y)
-#define rep(i, s, n) for(auto i = s; i < n; i++)
-#define reprv(i, s, n) for(auto i = s; i >= n; i--)
+#define fint(i, s, n) for(int i = s; i < n; i++)
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
-#define addm(x, y) if(!has(x, y)) { x[y] = 1; } else { x[y]++; }
 #define all(x) x.begin(), x.end()
 #define sz(x) (x.size())
 #define minel(x) *min_element(all(x))
@@ -38,12 +36,49 @@ using imat = vector<vector<int>>;
 using str = string;
 
 constexpr int inf = 3e5 + 100;
-constexpr int mod = 1e9 + 7;
+constexpr ll mod = 1000000000 + 7;
 constexpr ll maxnum = 2e9 + 1;
 
 
 void solve() {
-      
+  int n, k;
+  cin >> n >> k;
+
+  vector<ll> nums(n);
+  fin(v, nums) {
+    cin >> v;
+  }
+
+  ll ts = 0;
+  ll mxx = 0;
+
+  ll crrS = 0;
+  for(int i = 0; i < n; i++) {
+    crrS += nums[i];
+    if(crrS <= 0) {
+      crrS = 0;
+    }
+    else {
+      mxx = max(crrS, mxx);
+    }
+
+    ts += nums[i];
+  }
+
+  if(mxx <= 0) {
+    print((ts % mod + mod) % mod);
+    return;
+  }
+
+  int t = 1;
+  for (int i = 0; i < k; i++) {
+      t = t * 2 % mod;
+  }
+
+  mxx = mxx % mod;
+
+  int ans = (ts + mxx * t - mxx + mod) % mod;
+  print(ans);
 }
 
 int main() {

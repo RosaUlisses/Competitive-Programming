@@ -15,11 +15,9 @@ auto print_values = [](auto&&... args) {
 #define print(...) print_values(__VA_ARGS__);  
 
 #define fin(x, y) for(auto& x : y)
-#define rep(i, s, n) for(auto i = s; i < n; i++)
-#define reprv(i, s, n) for(auto i = s; i >= n; i--)
+#define fint(i, s, n) for(int i = s; i < n; i++)
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
-#define addm(x, y) if(!has(x, y)) { x[y] = 1; } else { x[y]++; }
 #define all(x) x.begin(), x.end()
 #define sz(x) (x.size())
 #define minel(x) *min_element(all(x))
@@ -43,7 +41,29 @@ constexpr ll maxnum = 2e9 + 1;
 
 
 void solve() {
-      
+  int n;      
+  ll c;
+  cin >> n >> c;
+
+  vector<ll> il(n);
+  fin(v, il) cin >> v;
+
+  ll xp = 0;
+  fin(v, il) {
+    c -= (v * v);
+    xp += (v * 4);
+  }
+
+  c /= (4 * n);
+  xp /= (4 * n);
+
+  ll d = (xp * xp) - 4 * (-c);
+  ll ds = sqrt(d);
+
+  ll r1 = (-xp + ds) / 2; 
+  ll r2 = (-xp - ds) / 2; 
+
+  print(max(r1, r2));
 }
 
 int main() {

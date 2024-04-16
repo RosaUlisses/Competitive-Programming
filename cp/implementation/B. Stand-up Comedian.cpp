@@ -15,11 +15,9 @@ auto print_values = [](auto&&... args) {
 #define print(...) print_values(__VA_ARGS__);  
 
 #define fin(x, y) for(auto& x : y)
-#define rep(i, s, n) for(auto i = s; i < n; i++)
-#define reprv(i, s, n) for(auto i = s; i >= n; i--)
+#define fint(i, s, n) for(int i = s; i < n; i++)
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
-#define addm(x, y) if(!has(x, y)) { x[y] = 1; } else { x[y]++; }
 #define all(x) x.begin(), x.end()
 #define sz(x) (x.size())
 #define minel(x) *min_element(all(x))
@@ -41,9 +39,45 @@ constexpr int inf = 3e5 + 100;
 constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 2e9 + 1;
 
+int maxS(vector<ll> as) {
+  if(as[0] == 0) {
+    return 1;
+  }
+
+  ll s = as[0];
+
+  s += (2 * min(as[1], as[2]));
+
+  ll d = abs(as[1] - as[2]);
+
+  if(as[0] == as[3]) {
+    return s + as[3] + (d != 0 ? 1 : 0);
+  }
+
+  if(as[0] < as[3]) {
+    return s + as[0] + 1;
+  }
+
+  s += as[3];
+  as[0] -= as[3];
+
+  if(as[0] >= d) {
+    return s + d;
+  }
+
+  return s + as[0] + 1;
+}
+
 
 void solve() {
-      
+  vector<ll> as(4);   
+  fin(v, as) cin >> v;
+
+  ll res = maxS(as);
+
+  dbg(res);
+
+  print(res);
 }
 
 int main() {

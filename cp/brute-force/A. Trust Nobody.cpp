@@ -1,7 +1,4 @@
 #include <bits/stdc++.h>
-#ifndef ONLINE_JUDGE
-  #include "/home/ullas/Programming/Competitive-Programming/cp/debug.h"
-#endif
 
 #ifdef ONLINE_JUDGE
   #define dbg(...) 
@@ -15,11 +12,9 @@ auto print_values = [](auto&&... args) {
 #define print(...) print_values(__VA_ARGS__);  
 
 #define fin(x, y) for(auto& x : y)
-#define rep(i, s, n) for(auto i = s; i < n; i++)
-#define reprv(i, s, n) for(auto i = s; i >= n; i--)
+#define fint(i, s, n) for(int i = s; i < n; i++)
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
-#define addm(x, y) if(!has(x, y)) { x[y] = 1; } else { x[y]++; }
 #define all(x) x.begin(), x.end()
 #define sz(x) (x.size())
 #define minel(x) *min_element(all(x))
@@ -43,7 +38,28 @@ constexpr ll maxnum = 2e9 + 1;
 
 
 void solve() {
-      
+  int n; 
+  cin >> n;
+
+  ivec l(n);
+  fin(v, l) cin >> v;
+
+  int ans = -1;
+  for(int nl = 0; nl <= n; nl++) {
+    int snl = 0;
+
+    fin(v, l) {
+      if(v > nl) {
+        snl++;
+      }
+    }
+
+    if(nl == snl) {
+      ans = nl;
+    }
+  }
+
+  print(ans);
 }
 
 int main() {
