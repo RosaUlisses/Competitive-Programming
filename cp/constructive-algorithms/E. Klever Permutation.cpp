@@ -44,7 +44,56 @@ constexpr ll maxnum = 0x3f3f3f3f3f3f3f3fLL;
 
 
 void solve() {
-  
+  int n, k;  
+  cin >> n >> k;
+
+  ivec nums(k);
+  ivec inc(k, n / k - 1);
+
+
+  int r = n % k; 
+
+  forn(i, r) {
+    inc[i]++;
+  }
+
+
+  nums[0] = 1; 
+
+   for(int i = 1; i < k; i++) {
+      if(i % 2 != 0) {
+          int ml = nums[i - 1] + inc[i - 1];
+          int x = inc[i] + ml + 1;
+          nums[i] = x;
+      }
+      else {
+        nums[i] = nums[i - 1] + 1;
+      }
+   }
+
+  dbg(nums);
+
+  ivec ans = nums;
+
+  for(int i = 0; i < n; ) {
+    forn(j, k) {
+      if(j % 2 == 0) nums[j]++;
+      else nums[j]--;
+
+      if(j + i + k < n) {
+        ans.pb(nums[j]);
+      }
+    } 
+    i += k;
+  }
+
+  dbg(ans);
+
+  fin(v, ans) {
+    cout << v << " ";
+  }
+
+  cout << endl;
 }
 
 int32_t main() {

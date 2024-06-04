@@ -31,7 +31,7 @@ constexpr ll maxnum = 3e5 + 100;
 
 void solve() {
     int a, b;
-    cin >> a >> b
+    cin >> a >> b;
     
     int count = 0;
     while(a % b != 0) {

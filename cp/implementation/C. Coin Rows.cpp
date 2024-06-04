@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <bits/stdc++.h>
 #ifndef ONLINE_JUDGE
   #include "/home/ullas/Programming/Competitive-Programming/cp/debug.h"
@@ -15,8 +16,8 @@ auto print_values = [](auto&&... args) {
 #define print(...) print_values(__VA_ARGS__);  
 
 #define fin(x, y) for(auto& x : y)
-#define forn(i, n) for(auto i = 0; i < n; ++i)
-#define forv(i, n) for(auto i = n; i >= 0; --i)
+#define rep(i, s, n) for(auto i = s; i < n; ++i)
+#define reprv(i, s, n) for(auto i = s; i >= n; --i)
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
 #define addm(x, y) if(!has(x, y)) { x[y] = 1; } else { x[y]++; }
@@ -25,7 +26,6 @@ auto print_values = [](auto&&... args) {
 #define f first
 #define s second
 #define pb push_back
-#define eb emplace_back
 #define int long long
 
 
@@ -44,7 +44,41 @@ constexpr ll maxnum = 0x3f3f3f3f3f3f3f3fLL;
 
 
 void solve() {
+  int n;  
+  cin >> n;
+  ivec a(n), b(n);
+
+  fin(v, a) cin >> v;
+  int sb = 0;
+  fin(v, b) {
+    cin >> v;
+    sb += v;
+  } 
   
+  if(n == 1) {
+    print(0);
+    return;
+  }
+
+  sb -= b[n-1];
+  ivec pa(n), pb(n);
+  
+  int s = 0;
+  for(int i = n - 1; i >= 0; i--) {
+    pa[i] = s;
+    s += a[i];
+  }
+
+  ivec vals;
+  int sbb = 0;
+  for(int i = 0; i < n; i++) {
+    int mx = max(pa[i], sbb);
+    if(i != n) sbb += b[i];
+    vals.push_back(mx);
+  }
+
+  int mn = *min_element(all(vals));
+  print(mn);
 }
 
 int32_t main() {

@@ -15,8 +15,8 @@ auto print_values = [](auto&&... args) {
 #define print(...) print_values(__VA_ARGS__);  
 
 #define fin(x, y) for(auto& x : y)
-#define forn(i, n) for(auto i = 0; i < n; ++i)
-#define forv(i, n) for(auto i = n; i >= 0; --i)
+#define rep(i, s, n) for(auto i = s; i < n; ++i)
+#define reprv(i, s, n) for(auto i = s; i >= n; --i)
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
 #define addm(x, y) if(!has(x, y)) { x[y] = 1; } else { x[y]++; }
@@ -25,7 +25,6 @@ auto print_values = [](auto&&... args) {
 #define f first
 #define s second
 #define pb push_back
-#define eb emplace_back
 #define int long long
 
 
@@ -44,7 +43,44 @@ constexpr ll maxnum = 0x3f3f3f3f3f3f3f3fLL;
 
 
 void solve() {
-  
+  int n;  
+  cin >> n;
+
+  str s;
+  cin >> s;
+
+  vector<char> r;
+  set<int> c;
+
+  fin(v, s) {
+    if(!has(c, v)) {
+      c.insert(v);
+      r.push_back(v);
+    }
+  }
+
+  sort(all(r));
+
+
+  map<char, int> pos;
+  for(int i = 0; i < sz(r); i++) {
+    if(!has(pos, r[i])) {
+      pos[r[i]] = i;
+    }
+  }
+
+
+  str ans;
+
+  fin(v, s) {
+    int p = pos[v];
+    int szr = sz(r) - 1;
+    int six = abs(szr - p);
+
+    ans.push_back(r[six]);
+  }
+
+  print(ans);
 }
 
 int32_t main() {

@@ -59,7 +59,7 @@ void solve() {
                equal = false;
            }
 
-            else {
+           else {
                 if(has(alt, ix)) {
                     sum = sum - (alt[ix] - num);
                     alt.insert({ix, num});

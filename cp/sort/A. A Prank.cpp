@@ -15,8 +15,8 @@ auto print_values = [](auto&&... args) {
 #define print(...) print_values(__VA_ARGS__);  
 
 #define fin(x, y) for(auto& x : y)
-#define forn(i, n) for(auto i = 0; i < n; ++i)
-#define forv(i, n) for(auto i = n; i >= 0; --i)
+#define rep(i, s, n) for(auto i = s; i < n; ++i)
+#define reprv(i, s, n) for(auto i = s; i >= n; --i)
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
 #define addm(x, y) if(!has(x, y)) { x[y] = 1; } else { x[y]++; }
@@ -25,7 +25,6 @@ auto print_values = [](auto&&... args) {
 #define f first
 #define s second
 #define pb push_back
-#define eb emplace_back
 #define int long long
 
 
@@ -44,7 +43,30 @@ constexpr ll maxnum = 0x3f3f3f3f3f3f3f3fLL;
 
 
 void solve() {
-  
+  int n;  
+  cin >> n;
+
+  ivec nums(n);
+  fin(v, nums) cin >> v;
+
+  int mx = 0;
+  for(int i = 0; i < n; i++) {
+    int b = i;
+    while(i < n - 1 and nums[i] + 1 == nums[i + 1]) {
+      i++;
+    }
+
+    dbg(b, i);
+    int l = i - b + 1;
+    dbg(l);
+    if((b == 0 and nums[0] == 1) or (i == n - 1 and nums[i] == 1000)) l++; 
+
+    l -= 2;
+
+    mx = max(l, mx);
+  }
+
+  print(mx);
 }
 
 int32_t main() {
@@ -56,8 +78,7 @@ int32_t main() {
     freopen("error.txt", "w", stderr);
   #endif
 
-  int nt;
-  cin >> nt;
+  int nt = 1;
 
   while(nt--) {
     solve();

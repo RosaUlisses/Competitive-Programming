@@ -15,23 +15,24 @@ auto print_values = [](auto&&... args) {
 #define print(...) print_values(__VA_ARGS__);  
 
 #define fin(x, y) for(auto& x : y)
-#define forn(i, n) for(auto i = 0; i < n; ++i)
-#define forv(i, n) for(auto i = n; i >= 0; --i)
+#define rep(i, s, n) for(auto i = s; i < n; ++i)
+#define reprv(i, s, n) for(auto i = s; i >= n; --i)
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
 #define addm(x, y) if(!has(x, y)) { x[y] = 1; } else { x[y]++; }
 #define all(x) x.begin(), x.end()
 #define sz(x) (x.size())
+#define minel(x) *min_element(all(x))
+#define maxel(x) *max_element(all(x))
 #define f first
 #define s second
-#define pb push_back
-#define eb emplace_back
 #define int long long
 
 
 using namespace std;
 
 using ll = long long;
+using ull = unsigned long long;
 using ii = pair<int, int>;
 using ivec = vector<int>;
 using imat = vector<vector<int>>;
@@ -44,7 +45,47 @@ constexpr ll maxnum = 0x3f3f3f3f3f3f3f3fLL;
 
 
 void solve() {
-  
+  int n;
+  cin >> n;
+  ivec nums;  
+  set<int> vs;
+
+  int mn = inf;
+
+  int ans = 0;
+  for(int i = 0; i < 2 * n; i++) {
+    str s;
+    cin >> s;
+    dbg(mn, nums, vs);
+    if(s == "add") {
+      int v;
+      cin >> v;
+      nums.push_back(v);
+      if(mn == 0) mn = v;
+      mn = min(v, mn);
+      vs.insert(v);
+    }
+    else {
+      if(mn == nums[sz(nums) - 1]) {
+        dbg(mn, nums);
+        nums.pop_back();
+        vs.erase(mn);
+        mn = minel(vs);
+      }
+      else {
+        ans++;
+        sort(all(nums), [](auto a, auto b) {
+          return a > b;
+        });
+        dbg(nums);
+        nums.pop_back();
+        vs.erase(mn);
+        mn = minel(vs);
+      }
+    }
+  }
+
+  print(ans);
 }
 
 int32_t main() {
@@ -56,8 +97,7 @@ int32_t main() {
     freopen("error.txt", "w", stderr);
   #endif
 
-  int nt;
-  cin >> nt;
+  int nt = 1;
 
   while(nt--) {
     solve();

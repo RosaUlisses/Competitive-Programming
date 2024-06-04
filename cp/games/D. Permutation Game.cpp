@@ -15,17 +15,17 @@ auto print_values = [](auto&&... args) {
 #define print(...) print_values(__VA_ARGS__);  
 
 #define fin(x, y) for(auto& x : y)
-#define forn(i, n) for(auto i = 0; i < n; ++i)
-#define forv(i, n) for(auto i = n; i >= 0; --i)
+#define rep(i, s, n) for(auto i = s; i < n; ++i)
+#define reprv(i, s, n) for(auto i = s; i >= n; --i)
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
 #define addm(x, y) if(!has(x, y)) { x[y] = 1; } else { x[y]++; }
 #define all(x) x.begin(), x.end()
 #define sz(x) (x.size())
+#define minel(x) *min_element(all(x))
+#define maxel(x) *max_element(all(x))
 #define f first
 #define s second
-#define pb push_back
-#define eb emplace_back
 #define int long long
 
 
@@ -42,9 +42,44 @@ constexpr int inf = 0x3f3f3f3f;
 constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 0x3f3f3f3f3f3f3f3fLL;
 
+int calc(ivec& p, ivec& a, int s, int k) {
+  ll mx = 0, curr = 0;
+  set<int> vis;
+  
+  while(!has(vis, s) and k > 0) {
+    vis.insert(s); 
+    mx = max(mx, curr + a[s] * k);
+    curr += a[s];
+    k--;
+    s = p[s];
+  }
+
+  return mx;
+}
 
 void solve() {
-  
+  int n, k, pb, ps;   
+  cin >> n >> k >> pb >> ps;
+
+  ivec p(n), a(n);
+  fin(v, p) {
+    cin >> v;
+    v--;
+  } 
+  fin(v, a) cin >> v;
+
+  int bv = calc(p, a, pb - 1, k);
+  int sv = calc(p, a, ps - 1, k);
+
+  if(bv > sv) {
+    print("Bodya");
+  }
+  else if(sv > bv) {
+    print("Sasha");
+  }
+  else {
+    print("Draw");
+  }
 }
 
 int32_t main() {

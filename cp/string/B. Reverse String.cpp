@@ -15,8 +15,8 @@ auto print_values = [](auto&&... args) {
 #define print(...) print_values(__VA_ARGS__);  
 
 #define fin(x, y) for(auto& x : y)
-#define forn(i, n) for(auto i = 0; i < n; ++i)
-#define forv(i, n) for(auto i = n; i >= 0; --i)
+#define rep(i, s, n) for(auto i = s; i < n; ++i)
+#define reprv(i, s, n) for(auto i = s; i >= n; --i)
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
 #define addm(x, y) if(!has(x, y)) { x[y] = 1; } else { x[y]++; }
@@ -25,7 +25,6 @@ auto print_values = [](auto&&... args) {
 #define f first
 #define s second
 #define pb push_back
-#define eb emplace_back
 #define int long long
 
 
@@ -44,7 +43,47 @@ constexpr ll maxnum = 0x3f3f3f3f3f3f3f3fLL;
 
 
 void solve() {
-  
+  str s, t;
+  cin >> s >> t;
+
+  bool f = false;
+  for(int i = 0; i < sz(s); i++) {
+    int ix = 0, j = i;
+    int c = 0;
+    str ax;
+
+    int k = 0;
+    for(int j = sz(t); j >= 0; j--) {
+      str aux;
+      int last;
+      for(int l = 0; l < j; l++) {
+        if(l + i > sz(s)) break;
+        aux.pb(s[l+i]);
+        last = l + i;
+      }
+
+      dbg(aux, last, k , j);
+
+      last--;
+      for(int l = last; l > last-k; l--) {
+        if(l < 0) break; 
+        dbg(s[l], l);
+        aux.pb(s[l]);
+      }
+
+      dbg(aux); 
+
+      if(aux == t) {
+        print("YES");
+        return;
+      }
+
+      k++;
+    }
+
+  }
+
+  print("NO");
 }
 
 int32_t main() {

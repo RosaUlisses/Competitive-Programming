@@ -15,23 +15,24 @@ auto print_values = [](auto&&... args) {
 #define print(...) print_values(__VA_ARGS__);  
 
 #define fin(x, y) for(auto& x : y)
-#define forn(i, n) for(auto i = 0; i < n; ++i)
-#define forv(i, n) for(auto i = n; i >= 0; --i)
+#define rep(i, s, n) for(auto i = s; i < n; ++i)
+#define reprv(i, s, n) for(auto i = s; i >= n; --i)
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
 #define addm(x, y) if(!has(x, y)) { x[y] = 1; } else { x[y]++; }
 #define all(x) x.begin(), x.end()
 #define sz(x) (x.size())
+#define minel(x) *min_element(all(x))
+#define maxel(x) *max_element(all(x))
 #define f first
 #define s second
-#define pb push_back
-#define eb emplace_back
 #define int long long
 
 
 using namespace std;
 
 using ll = long long;
+using ull = unsigned long long;
 using ii = pair<int, int>;
 using ivec = vector<int>;
 using imat = vector<vector<int>>;
@@ -42,9 +43,31 @@ constexpr int inf = 0x3f3f3f3f;
 constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 0x3f3f3f3f3f3f3f3fLL;
 
+int gcd(int a, int b) {
+  if(b == 0) return a;
+  return gcd(b, a % b);
+}
+
+
 
 void solve() {
-  
+  int x;
+  cin >> x;
+
+  int y = -inf;
+  int g = -inf;
+
+  for(int i = 1; i < x; i++) {
+    int val = gcd(x, i) + i;
+    if(val > g) {
+      g = val;
+      y = i;
+    }
+
+    dbg(i, val);
+  }
+
+  print(y);
 }
 
 int32_t main() {

@@ -15,8 +15,8 @@ auto print_values = [](auto&&... args) {
 #define print(...) print_values(__VA_ARGS__);  
 
 #define fin(x, y) for(auto& x : y)
-#define forn(i, n) for(auto i = 0; i < n; ++i)
-#define forv(i, n) for(auto i = n; i >= 0; --i)
+#define rep(i, s, n) for(auto i = s; i < n; ++i)
+#define reprv(i, s, n) for(auto i = s; i >= n; --i)
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
 #define addm(x, y) if(!has(x, y)) { x[y] = 1; } else { x[y]++; }
@@ -25,7 +25,6 @@ auto print_values = [](auto&&... args) {
 #define f first
 #define s second
 #define pb push_back
-#define eb emplace_back
 #define int long long
 
 
@@ -44,7 +43,40 @@ constexpr ll maxnum = 0x3f3f3f3f3f3f3f3fLL;
 
 
 void solve() {
-  
+  int n;   
+  cin >> n;
+
+  ivec nums(n);
+  fin(v, nums) cin >> v;
+
+  for(int i = 0; i < n - 1; i++) {
+    if(nums[i] > nums[i + 1]) {
+      nums[i + 1] = -(nums[i] - nums[i + 1]);
+      nums[i] = 0;
+    }
+    if(nums[i] <= nums[i + 1]) {
+      if(nums[i] < 0) {
+        nums[i + 1] += (-nums[i]);
+        nums[i] = 0;
+      }
+      else {
+        nums[i + 1] -= nums[i];
+        nums[i] = 0;
+      }
+    }
+  }
+
+  int zc = 0;
+  for(int i = 0; i < n - 1; i++) {
+    if(nums[i] == 0) zc++; 
+  }
+
+  if(nums[n - 1] < 0 and zc % 2 != 0) {
+    print("NO");
+  }
+  else {
+    print("YES");
+  }
 }
 
 int32_t main() {

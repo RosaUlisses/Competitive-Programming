@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <string>
 #ifndef ONLINE_JUDGE
   #include "/home/ullas/Programming/Competitive-Programming/cp/debug.h"
 #endif
@@ -15,8 +16,8 @@ auto print_values = [](auto&&... args) {
 #define print(...) print_values(__VA_ARGS__);  
 
 #define fin(x, y) for(auto& x : y)
-#define forn(i, n) for(auto i = 0; i < n; ++i)
-#define forv(i, n) for(auto i = n; i >= 0; --i)
+#define rep(i, s, n) for(auto i = s; i < n; ++i)
+#define reprv(i, s, n) for(auto i = s; i >= n; --i)
 #define midp(x, y) ((x + y) / 2)
 #define has(x, y) (x.find(y) != x.end())
 #define addm(x, y) if(!has(x, y)) { x[y] = 1; } else { x[y]++; }
@@ -24,9 +25,7 @@ auto print_values = [](auto&&... args) {
 #define sz(x) (x.size())
 #define f first
 #define s second
-#define pb push_back
-#define eb emplace_back
-#define int long long
+#define int unsigned long long
 
 
 using namespace std;
@@ -42,9 +41,39 @@ constexpr int inf = 0x3f3f3f3f;
 constexpr int mod = 1e9 + 7;
 constexpr ll maxnum = 0x3f3f3f3f3f3f3f3fLL;
 
+int mcp(vector<str>& pows, str n) {
+  int ct = maxnum;
+
+  fin(p, pows) {
+    int i = 0, j = 0, tk = 0;
+    while(i < sz(n) and j < sz(p)) {
+      if(n[i] == p[j]) {
+        j++;
+        tk++;
+      }
+      i++;
+    }
+
+    int crt = sz(n) - tk + sz(p) - tk;
+    ct = min(ct, crt);
+  }
+  
+  return ct;
+}
+
 
 void solve() {
-  
+  str n;  
+  cin >> n;
+
+  vector<str> pows;
+  for(int i = 1; i <= 2e18; i*=2) {
+    pows.push_back(to_string(i));
+  }
+
+  int ans = mcp(pows, n);
+
+  print(ans);
 }
 
 int32_t main() {
